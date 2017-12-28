@@ -84,6 +84,9 @@ table {
     .spotlight__inputbg:after {
       content: attr(data-autocomplete);
       color: #9F9FA0; }
+      .spotlight__search--smalldescr .spotlight__inputbg:after {
+        font-size: 16px;
+        vertical-align: middle; }
   .spotlight__input {
     position: relative;
     width: 100%;
@@ -96,7 +99,7 @@ table {
   .spotlight__item {
     padding: 4px 8px;
     color: #FFFFFF; }
-    .spotlight__item:hover {
+    .spotlight__item:hover, .spotlight__item--active {
       background-color: #272727; }
     .spotlight__item:last-child {
       margin-bottom: 8px; }
