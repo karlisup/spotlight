@@ -1,12 +1,6 @@
 // TODO:
 // 2) arrow movement still maintaining the focus
-// 3) actions (still in progress?)
-//        - copy (something from attributes)
-//        - open on left/right
-// 4) show description in smaller case
-// 5) do different autocomplete for -- description.
 // 6) not working on iphone4 (calling sequence)
-
 
 
 (function(window){
@@ -14,6 +8,7 @@
     var inputbg = $('.spotlight__inputbg')
     var list = $('.spotlight__list')
     var inputWrapper = $('.spotlight__search')
+    var resultList = $('.spotlight__list')
     
     input.on('input', function () {   
         // console.log(inputbg.html(), input.val(), inputbg.attr('data-autocomplete'))     
@@ -24,6 +19,7 @@
         // copy input text into inputbg
         if (input.val().length === 0) {
             inputbg.attr('data-autocomplete', '')
+            returnResults('')
         }
         else if (!startsWithSubstring(inputbg.html() + inputbg.attr('data-autocomplete'), input.val())) {
             console.log('Doesn\'t start with substring')
@@ -44,17 +40,36 @@
 
         if (keyCode == 9) { // tab - autocomplete
             e.preventDefault();
-            input.val(input.val() + inputbg.attr('data-autocomplete'))
+            if(inputWrapper.hasClass('spotlight__search--smalldescr')) {
+                input.val(inputbg.attr('data-autocomplete').substring(3)) // remove " – " prefix
+            } else {
+                input.val(input.val() + inputbg.attr('data-autocomplete'))
+            }
             clearTitle()
         }
+        // TODO add the navigation 
         if (keyCode == 38) { // top - navigate list
             e.preventDefault();
+            setNextActiveItem('up')
         }
         if (keyCode == 40) { // bottom - navigate list
+            e.preventDefault();
+            setNextActiveItem('down')
         }
     });
 
-    function populateSingleSearchResult(img = null, title = '', subtitle = '') {
+    function setNextActiveItem(direction) {
+        var activeItem = $('.spotlight__item--active')
+        if(direction === 'up') {
+            activeItem.prev().addClass('spotlight__item--active')
+        }
+        else if (direction === 'down') {
+            activeItem.next().addClass('spotlight__item--active')
+        }
+        activeItem.removeClass('spotlight__item--active')
+    }
+
+    function formatSingleSearchResult(img = null, title = '', subtitle = '') {
         var image = ''
         if (img) {
             image += '' +
@@ -75,18 +90,26 @@
         clearTitle()
         // if beginning of the string matches title show autocomplete
         // else show it as a description via longdash ( – )
-        if (title.toLowerCase().match("^" + input.val().toLowerCase())) {
+        if (startsWithSubstring(title.toLowerCase(), input.val().toLowerCase())) {
+            if (inputWrapper.hasClass('spotlight__search--smalldescr')) {
+                inputWrapper.removeClass('spotlight__search--smalldescr')
+            }
             var otherPartOfTitle = title.substring(input.val().length)            
             inputbg.attr('data-autocomplete', otherPartOfTitle)
         } else {
+            if (!inputWrapper.hasClass('spotlight__search--smalldescr')){
+                inputWrapper.addClass('spotlight__search--smalldescr')
+            }
             inputbg.attr('data-autocomplete', " – " + title)
         }
     }
 
     function returnResults(results) {
-        // set results
-        clearResults()
-        list.append(results)
+        list.html(results)
+        // select first item
+        if (results !== '') {
+            $('.spotlight__item', resultList).first().addClass('spotlight__item--active')
+        }
     }
 
     /**
@@ -98,7 +121,6 @@
     function startsWithSubstring(text, substring) {
         text = text.toLowerCase()
         substring = substring.toLowerCase()
-        console.log(substring+"|||"+text, text.match("^" + substring))
         if(text.match("^" + substring)) {
             return true
         } else {
@@ -106,20 +128,14 @@
         }
     }
 
-    function clearResults() {
-        list.empty()
-    }
-
     function clearTitle() {
         inputbg.attr('data-autocomplete', '')
     }
 
     // make some functions publicly available
-    // TODO: hah most of the functions now are public - really?
-    window.returnResults = returnResults;
-    window.populateSingleSearchResult = populateSingleSearchResult;
+    // TODO: add namespace e.g. window.spotlight.ret...
+    window.formatSingleSearchResult = formatSingleSearchResult;
     window.clearTitle = clearTitle;
-    window.clearResults = clearResults;
     window.returnResults = returnResults;
     window.setAutocomplete = setAutocomplete;
 
