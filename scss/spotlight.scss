@@ -56,8 +56,10 @@ $spotlight-width: 540px;
 			&:after {
 				content: attr(data-autocomplete);
 				color: $color-gray63;
-				// font-size: 16px;
-				// vertical-align: middle;
+				.spotlight__search--smalldescr & {
+					font-size: 16px;
+					vertical-align: middle;
+				}
 			}
 		}
 		&__input {
@@ -75,7 +77,7 @@ $spotlight-width: 540px;
 	&__item {
 		padding: 4px 8px;
 		color: $color-white;
-		&:hover {
+		&:hover, &--active {
 			background-color: $color-gray15;
 		}
 		// way of adding padding bottom, but not influencing
