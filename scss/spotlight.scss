@@ -1,0 +1,119 @@
+$border-radius: 3px;
+$spotlight-width: 540px;
+
+@import 'reset';
+@import 'colors';
+
+@mixin ellipsis() {
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap
+}
+
+%inputStyle {
+	box-sizing: border-box;
+	background-color: transparent;
+	border: none;
+	padding: 0;
+
+	color: $color-white;
+	font-size: 34px;
+	font-weight: 300;
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+	// line-height: 1.15;
+	line-height: 40px; // non-pixel values causes slight 1px margin on Safari
+	outline: none;
+}
+
+.spotlight {
+	position: fixed;
+	top: 15%;
+	left: 50%;
+	width: 100%;
+	max-width: $spotlight-width;
+	transform: translateX(-50%);
+	transition: top .3s ease-in-out;
+	
+	border-radius: $border-radius;
+	overflow: hidden;
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+
+	&__search {
+		position: relative;
+		padding: 12px 16px;
+		background-color: $color-alpha;
+	}
+		&__input, &__inputbg, &__inputbg:after {
+			@extend %inputStyle;
+		}
+		&__inputbg {
+			@include ellipsis();
+			white-space: pre; // to show white spaces that comes after string
+			position: absolute;
+			display: inline-block;
+			color: transparent;
+			max-width: 100%;
+			&:after {
+				content: attr(data-autocomplete);
+				color: $color-gray63;
+				// font-size: 16px;
+				// vertical-align: middle;
+			}
+		}
+		&__input {
+			position: relative;
+			width: 100%;
+			margin: 0; // Fix Safari sync with inputbg
+		}
+	
+	&__list {
+		overflow: hidden; // simple clearfix
+		padding-right: 8px;
+		padding-left: 8px;
+		background-color: $color-alpha;
+	}
+	&__item {
+		padding: 4px 8px;
+		color: $color-white;
+		&:hover {
+			background-color: $color-gray15;
+		}
+		// way of adding padding bottom, but not influencing
+		// how does empty list look like.
+		&:last-child {
+			margin-bottom: 8px;
+		}
+	}
+		&__figure {
+			float: left;
+			width: 32px;
+			height: 32px;
+			margin-right: 8px;
+		}
+		&__image {
+
+		}
+		&__title {
+			font-weight: 300;
+			font-size: 15px;
+			@include ellipsis();
+		}
+		&__subtitle {
+			margin-top: 4px;
+
+			font-weight: 100;
+			font-size: 12px;
+			color: $color-gray71;
+			@include ellipsis();
+		}
+
+
+		// layout for mobile devices
+		@media (max-width: $spotlight-width + 2*16px) {
+			transform: none;
+			width: auto;
+			top: 16px;
+			left: 16px;
+			right: 16px;
+		}
+}

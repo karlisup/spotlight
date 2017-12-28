@@ -1,0 +1,127 @@
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline; }
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block; }
+
+body {
+  line-height: 1; }
+
+ol, ul {
+  list-style: none; }
+
+blockquote, q {
+  quotes: none; }
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none; }
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0; }
+
+.spotlight__input, .spotlight__inputbg, .spotlight__inputbg:after {
+  box-sizing: border-box;
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  color: #FFFFFF;
+  font-size: 34px;
+  font-weight: 300;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  line-height: 40px;
+  outline: none; }
+
+.spotlight {
+  position: fixed;
+  top: 15%;
+  left: 50%;
+  width: 100%;
+  max-width: 540px;
+  transform: translateX(-50%);
+  transition: top .3s ease-in-out;
+  border-radius: 3px;
+  overflow: hidden;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"; }
+  .spotlight__search {
+    position: relative;
+    padding: 12px 16px;
+    background-color: #0B0B0B; }
+  .spotlight__inputbg {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    position: absolute;
+    display: inline-block;
+    color: transparent;
+    max-width: 100%; }
+    .spotlight__inputbg:after {
+      content: attr(data-autocomplete);
+      color: #9F9FA0; }
+  .spotlight__input {
+    position: relative;
+    width: 100%;
+    margin: 0; }
+  .spotlight__list {
+    overflow: hidden;
+    padding-right: 8px;
+    padding-left: 8px;
+    background-color: #0B0B0B; }
+  .spotlight__item {
+    padding: 4px 8px;
+    color: #FFFFFF; }
+    .spotlight__item:hover {
+      background-color: #272727; }
+    .spotlight__item:last-child {
+      margin-bottom: 8px; }
+  .spotlight__figure {
+    float: left;
+    width: 32px;
+    height: 32px;
+    margin-right: 8px; }
+  .spotlight__title {
+    font-weight: 300;
+    font-size: 15px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap; }
+  .spotlight__subtitle {
+    margin-top: 4px;
+    font-weight: 100;
+    font-size: 12px;
+    color: #B6B6B6;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap; }
+  @media (max-width: 572px) {
+    .spotlight {
+      transform: none;
+      width: auto;
+      top: 16px;
+      left: 16px;
+      right: 16px; } }
