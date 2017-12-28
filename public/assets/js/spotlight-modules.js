@@ -26,7 +26,7 @@
                 setAutocomplete(title)
             } else {
                 clearTitle();
-                clearResults();
+                returnResults('');
             }
         });
     }
@@ -37,8 +37,8 @@
         $(forecast).each(function() {
             var image = {}
             image.alt = this.text
-            // console.log(this.text)
-            if (!["Snow Showers", "Rain And Snow", "Rain", "Partly Cloudy", "Mostly Cloudy", "Cloudy", "Showers", "Scattered Showers", "Scattered Thundershowers", "Mostly Sunny", "Thunderstorms", "Sunny", "Clear", "Snow", "Scattered Thunderstorms", "Breezy", "Mostly Clear", "Scattered Snow Showers", "Isolated Thunderstorms", "Windy"].includes(this.text)) {
+            
+            if (!["Snow Showers", "Rain And Snow", "Rain", "Partly Cloudy", "Mostly Cloudy", "Cloudy", "Showers", "Scattered Showers", "Scattered Thundershowers", "Mostly Sunny", "Thunderstorms", "Sunny", "Clear", "Snow", "Scattered Thunderstorms", "Breezy", "Mostly Clear", "Scattered Snow Showers", "Isolated Thunderstorms", "Windy", "Wintry Mix"].includes(this.text)) {
                 alert(this.text);
             }
             switch (this.text) {
@@ -47,6 +47,7 @@
                 case "Scattered Snow Showers":
                     image.src = "006-snowing-2.svg"
                     break;
+                case "Wintry Mix":
                 case "Snow":
                     image.src = "007-snowing.svg"
                     break;
@@ -86,8 +87,8 @@
             } else {
                 image.src = '/assets/images/weather/' + image.src 
             }
-            // console.log(image);
-            populatedResults += populateSingleSearchResult(
+            
+            populatedResults += formatSingleSearchResult(
                 image,
                 'from ' + this.low + '° to ' + this.high + '°C' ,
                 this.date + ' (' + this.day + ')'
