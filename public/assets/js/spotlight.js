@@ -17,23 +17,45 @@
         // if input size bigger: add input a letter from suggestion
         // if input size smaller: add suggestion a letter from input
         // copy input text into inputbg
+
         if (input.val().length === 0) {
-            inputbg.attr('data-autocomplete', '')
             returnResults('')
+            inputbg.attr('data-autocomplete', '')
+            inputbg.text('').html()
+            return
         }
-        else if (!startsWithSubstring(inputbg.html() + inputbg.attr('data-autocomplete'), input.val())) {
-            console.log('Doesn\'t start with substring')
-        }
-        else if (inputbg.html().length < input.val().length) {
-            inputbg.attr('data-autocomplete', inputbg.attr('data-autocomplete').substring(1) )
-        } else {
-            var string = inputbg.html()
-            var lastChar = string.charAt(string.length - 1)
-            inputbg.attr('data-autocomplete', lastChar + inputbg.attr('data-autocomplete'))
+
+        if (shouldUpdateCompletion(
+            input.val(),
+            inputbg.html(),
+            inputbg.attr('data-autocomplete'))) 
+        {
+            var newCompletion = comepletionPart(
+                input.val(),
+                inputbg.html(),
+                inputbg.attr('data-autocomplete'))
+            inputbg.attr('data-autocomplete', newCompletion)
         }
         
         inputbg.text(input.val()).html()
     })
+
+    function shouldUpdateCompletion(input, previousInput, previvousCompletion) {
+        if (!startsWithSubstring(previousInput + previvousCompletion, input)) {            
+            return false
+        }
+        return true
+    }
+
+    function comepletionPart(input, previousInput, previvousCompletion) {
+        if (previousInput.length < input.length) {
+            return previvousCompletion.substring(1)
+        } else {
+            var string = previousInput
+            var lastChar = string.charAt(string.length - 1)
+            return lastChar + previvousCompletion
+        }
+    }
 
     input.on('keydown', function (e) {
         var keyCode = e.keyCode || e.which;
@@ -56,6 +78,10 @@
             e.preventDefault();
             setNextActiveItem('down')
         }
+
+        // if ((e.ctrlKey || e.metaKey) && keyCode == )
+
+        // copyToClipboard
     });
 
     function setNextActiveItem(direction) {
@@ -140,3 +166,30 @@
     window.setAutocomplete = setAutocomplete;
 
 })(window)
+
+
+
+
+// Utility function
+// TODO: move inside it somewhere
+function copyToClipboard(text) {
+    if (window.clipboardData && window.clipboardData.setData) {
+        // IE specific code path to prevent textarea being shown while dialog is visible.
+        return clipboardData.setData("Text", text);
+
+    } else if (document.queryCommandSupported && document.queryCommandSupported("copy")) {
+        var textarea = document.createElement("textarea");
+        textarea.textContent = text;
+        textarea.style.position = "fixed";  // Prevent scrolling to bottom of page in MS Edge.
+        document.body.appendChild(textarea);
+        textarea.select();
+        try {
+            return document.execCommand("copy");  // Security exception may be thrown by some browsers.
+        } catch (ex) {
+            console.warn("Copy to clipboard failed.", ex);
+            return false;
+        } finally {
+            document.body.removeChild(textarea);
+        }
+    }
+}
