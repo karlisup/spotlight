@@ -11,6 +11,22 @@
         }
     })
 
+    // configure actions for modules (e.g. show on right/left pane)
+    input.on('keydown', function (e) {
+        var keyCode = e.keyCode || e.which;
+
+        // configure what to copy when Ctrl/Cmd+C is triggered
+        if ((e.ctrlKey || e.metaKey) && keyCode == 67) {
+            // e.g. if string starts with string
+            // 'wf' copy weather forcast title + ..
+
+
+            copyToClipboard()
+        }
+        // after actions gain focus back on input
+        $('.spotlight__input').focus();
+    });
+
     // general functions
     function getForecast(location) {
         var locationQuery = escape("select item from weather.forecast where woeid in (select woeid from geo.places(1) where text='" + location + "') and u='c'"),
