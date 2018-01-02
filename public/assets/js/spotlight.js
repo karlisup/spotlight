@@ -15,9 +15,9 @@
     var list = $('.spotlight__list')
     var inputWrapper = $('.spotlight__search')
     var resultList = $('.spotlight__list')
-    
-    input.on('input', function () {   
-        // console.log(inputbg.html(), input.val(), inputbg.attr('data-autocomplete'))     
+
+    input.on('input', function () {
+        // console.log(inputbg.html(), input.val(), inputbg.attr('data-autocomplete'))
         // if we delete everything: clear autocomplete
         // Gives (a fake) feeling that autocomplete is not slow
         // if input size bigger: add input a letter from suggestion
@@ -34,7 +34,7 @@
         if (shouldUpdateCompletion(
             input.val(),
             inputbg.html(),
-            inputbg.attr('data-autocomplete'))) 
+            inputbg.attr('data-autocomplete')))
         {
             var newCompletion = comepletionPart(
                 input.val(),
@@ -42,12 +42,12 @@
                 inputbg.attr('data-autocomplete'))
             inputbg.attr('data-autocomplete', newCompletion)
         }
-        
+
         inputbg.text(input.val()).html()
     })
 
     function shouldUpdateCompletion(input, previousInput, previvousCompletion) {
-        if (!startsWithSubstring(previousInput + previvousCompletion, input)) {            
+        if (!startsWithSubstring(previousInput + previvousCompletion, input)) {
             return false
         }
         return true
@@ -75,7 +75,7 @@
             }
             clearTitle()
         }
-        // TODO add the navigation 
+        // TODO add the navigation
         if (keyCode == 38) { // top - navigate list
             e.preventDefault();
             setNextActiveItem('up')
@@ -107,7 +107,7 @@
         }
         return '' +
             '<li class="spotlight__item">' +
-                image + 
+                image +
                 '<div class="spotlight__info">' +
                     '<h3 class="spotlight__title">' + title + '</h3>' +
                     '<p class="spotlight__subtitle">' + subtitle + '</p>' +
@@ -122,7 +122,7 @@
             if (inputWrapper.hasClass('spotlight__search--smalldescr')) {
                 inputWrapper.removeClass('spotlight__search--smalldescr')
             }
-            var otherPartOfTitle = title.substring(input.val().length)            
+            var otherPartOfTitle = title.substring(input.val().length)
             inputbg.attr('data-autocomplete', otherPartOfTitle)
         } else {
             if (!inputWrapper.hasClass('spotlight__search--smalldescr')){
@@ -142,8 +142,8 @@
 
     /**
      * Returns if text starts with substring
-     * @param {string} text 
-     * @param {string} substring 
+     * @param {string} text
+     * @param {string} substring
      * @returns {boolean}
      */
     function startsWithSubstring(text, substring) {

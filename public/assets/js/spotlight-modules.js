@@ -54,7 +54,7 @@
         $(forecast).each(function() {
             var image = {}
             image.alt = this.text
-            
+
             if (!["Snow Showers", "Rain And Snow", "Rain", "Partly Cloudy", "Mostly Cloudy", "Cloudy", "Showers", "Scattered Showers", "Scattered Thundershowers", "Mostly Sunny", "Thunderstorms", "Sunny", "Clear", "Snow", "Scattered Thunderstorms", "Breezy", "Mostly Clear", "Scattered Snow Showers", "Isolated Thunderstorms", "Windy", "Wintry Mix"].includes(this.text)) {
                 alert(this.text);
             }
@@ -102,9 +102,9 @@
             if (image.src === null) {
                 image = null
             } else {
-                image.src = '/assets/images/weather/' + image.src 
+                image.src = '/assets/images/weather/' + image.src
             }
-            
+
             populatedResults += formatSingleSearchResult(
                 image,
                 'from ' + this.low + '° to ' + this.high + '°C' ,
