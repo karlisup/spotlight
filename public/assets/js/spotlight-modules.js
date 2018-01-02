@@ -40,10 +40,10 @@
                 var ajaxResults = data.query.results.channel.item;
                 var title = ajaxResults.title.substring(15) // remove text "Conditions for "
                 returnWeatherForecast(ajaxResults.forecast)
-                setAutocomplete(title)
+                spotlight.setAutocomplete(title)
             } else {
-                clearTitle();
-                returnResults('');
+                spotlight.clearTitle();
+                spotlight.returnResults('');
             }
         });
     }
@@ -106,12 +106,13 @@
             }
 
             populatedResults += formatSingleSearchResult(
+            populatedResults += spotlight.formatSingleSearchResult(
                 image,
                 'from ' + this.low + '° to ' + this.high + '°C' ,
                 this.date + ' (' + this.day + ')'
             )
         })
-        returnResults(populatedResults)
+        spotlight.returnResults(populatedResults)
     }
 
 })()

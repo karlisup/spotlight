@@ -162,10 +162,14 @@
 
     // make some functions publicly available
     // TODO: add namespace e.g. window.spotlight.ret...
-    window.formatSingleSearchResult = formatSingleSearchResult;
-    window.clearTitle = clearTitle;
-    window.returnResults = returnResults;
-    window.setAutocomplete = setAutocomplete;
+
+    var spotlight = {
+        formatSingleSearchResult: formatSingleSearchResult,
+        clearTitle: clearTitle,
+        returnResults: returnResults,
+        setAutocomplete: setAutocomplete
+    }
+    window.spotlight = spotlight
 
 })(window)
 
