@@ -1,6 +1,12 @@
 // TODO:
-// 2) arrow movement still maintaining the focus
 // 6) not working on iphone4 (calling sequence)
+// 1) Having a scrollable list that is longer than 10 items
+// 2) Create function that selects next element in the list
+// 3) Create function that selects previous element in the list
+// 4) Attach top/bottom arrows to trigger functions 2) & 3)
+// 5) Attach scrolling to trigger functions 2) & 3)
+// 6) Create a scrollbar to indicate "scrolling position"
+
 
 
 (function(window){
@@ -78,10 +84,6 @@
             e.preventDefault();
             setNextActiveItem('down')
         }
-
-        // if ((e.ctrlKey || e.metaKey) && keyCode == )
-
-        // copyToClipboard
     });
 
     function setNextActiveItem(direction) {
