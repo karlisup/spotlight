@@ -19,9 +19,10 @@
         if ((e.ctrlKey || e.metaKey) && keyCode == 67) {
             // e.g. if string starts with string
             // 'wf' copy weather forcast title + ..
-
-
-            copyToClipboard()
+            var title = $('.spotlight__title', '.spotlight__item--active').html()
+            var subtitle = $('.spotlight__subtitle', '.spotlight__item--active').html()
+            console.log(title, subtitle)
+            copyToClipboard(subtitle + ' ' + title)
         }
         // after actions gain focus back on input
         $('.spotlight__input').focus();
