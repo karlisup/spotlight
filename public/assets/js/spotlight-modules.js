@@ -21,7 +21,6 @@
             // 'wf' copy weather forcast title + ..
             var title = $('.spotlight__title', '.spotlight__item--active').html()
             var subtitle = $('.spotlight__subtitle', '.spotlight__item--active').html()
-            console.log(title, subtitle)
             copyToClipboard(subtitle + ' ' + title)
         }
         // after actions gain focus back on input
@@ -51,14 +50,17 @@
     // result module specific code
     function returnWeatherForecast(forecast) {
         var populatedResults = ''
+        // console.log(forecast)
+        var forecast = forecast.concat(forecast)
         $(forecast).each(function() {
             var image = {}
             image.alt = this.text
 
-            if (!["Snow Showers", "Rain And Snow", "Rain", "Partly Cloudy", "Mostly Cloudy", "Cloudy", "Showers", "Scattered Showers", "Scattered Thundershowers", "Mostly Sunny", "Thunderstorms", "Sunny", "Clear", "Snow", "Scattered Thunderstorms", "Breezy", "Mostly Clear", "Scattered Snow Showers", "Isolated Thunderstorms", "Windy", "Wintry Mix"].includes(this.text)) {
+            if (!["Snow Showers", "Rain And Snow", "Rain", "Partly Cloudy", "Mostly Cloudy", "Cloudy", "Showers", "Scattered Showers", "Scattered Thundershowers", "Mostly Sunny", "Thunderstorms", "Sunny", "Clear", "Snow", "Scattered Thunderstorms", "Breezy", "Mostly Clear", "Scattered Snow Showers", "Isolated Thunderstorms", "Windy", "Wintry Mix", "Blowing Snow"].includes(this.text)) {
                 alert(this.text);
             }
             switch (this.text) {
+                case "Blowing Snow":
                 case "Snow Showers":
                 case "Rain And Snow":
                 case "Scattered Snow Showers":
@@ -105,7 +107,6 @@
                 image.src = '/assets/images/weather/' + image.src
             }
 
-            populatedResults += formatSingleSearchResult(
             populatedResults += spotlight.formatSingleSearchResult(
                 image,
                 'from ' + this.low + '° to ' + this.high + '°C' ,
