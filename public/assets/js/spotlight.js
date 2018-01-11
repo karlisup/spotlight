@@ -1,11 +1,6 @@
 // TODO:
 // 6) not working on iphone4 (calling sequence)
-// 1) Having a scrollable list that is longer than 10 items
-// 2) Create function that selects next element in the list
-// 3) Create function that selects previous element in the list
-// 4) Attach top/bottom arrows to trigger functions 2) & 3)
-// 5) Attach scrolling to trigger functions 2) & 3)
-// 6) Create a scrollbar to indicate "scrolling position"
+// 7) Create a scrollbar to indicate "scrolling position"
 
 
 
@@ -14,7 +9,12 @@
     var inputbg = $('.spotlight__inputbg')
     var list = $('.spotlight__list')
     var inputWrapper = $('.spotlight__search')
+    var resultWrapper = $('.spotlight__results')
     var resultList = $('.spotlight__list')
+    var listScrolltop = 0
+    // just imagine having Minecart driving up and down
+    var itemHeight = 39 //px
+    var minecartHeight = 10 * itemHeight; // default size 390px
 
     input.on('input', function () {
         // console.log(inputbg.html(), input.val(), inputbg.attr('data-autocomplete'))
@@ -28,6 +28,7 @@
             returnResults('')
             inputbg.attr('data-autocomplete', '')
             inputbg.text('').html()
+            resultWrapper.addClass('spotlight__results--empty')
             return
         }
 
@@ -86,16 +87,86 @@
         }
     });
 
+    $(resultList).on('mousewheel', function (event) {
+        if (event.originalEvent.wheelDelta >= 0) {
+            if (minecartAtTheTop()) return
+            singleScroll('up')
+        }
+        else {
+            if (minecartAtTheBottom()) return
+            singleScroll('down')
+        }
+    });
+
+    /**
+     * Called from outside on item hover
+     */
+    function selectItem(elem) {
+        $('.spotlight__item--active').removeClass('spotlight__item--active')
+        $(elem).addClass('spotlight__item--active')
+    }
+
+    // ||     ||
+    // ||     ||
+    // ||     ||
+    // ||     || goes up
+    // =========
+    // |#######| minecart is the
+    // |#######| visible parts of results
+    // |#######|
+    // |#######|
+    // =========
+    // ||     ||  goes down
+    // ||     ||
+    // ||     ||
+    // ||     ||
+    // ||     ||
+
+
+    function minecartAtTheTop () {
+        return resultList.scrollTop() === 0
+    }
+    function minecartAtTheBottom () {
+        var trackLength = $('.spotlight__item').length * itemHeight
+        return resultList.scrollTop() === trackLength - minecartHeight
+    }
+    function itemAtTheTopOfMinecart () {
+        return $('.spotlight__item--active').position().top === 0
+    }
+    function itemAtTheBottomOfMinecart () {
+        return $('.spotlight__item--active').position().top === minecartHeight - itemHeight
+    }
+
+    function singleScroll (direction) {
+        if (direction === 'up') {
+            listScrolltop -= itemHeight
+        } else {
+            listScrolltop += itemHeight
+        }
+        resultList.scrollTop(listScrolltop)
+    }
+
     function setNextActiveItem(direction) {
         var activeItem = $('.spotlight__item--active')
+
         if(direction === 'up') {
+            if (minecartAtTheTop() && itemAtTheTopOfMinecart()) return
+            if (itemAtTheTopOfMinecart()) {
+                singleScroll('up')
+            }
             activeItem.prev().addClass('spotlight__item--active')
         }
         else if (direction === 'down') {
+            if (minecartAtTheBottom() && itemAtTheBottomOfMinecart()) return
+            if (itemAtTheBottomOfMinecart()) {
+                singleScroll('down')
+            }
             activeItem.next().addClass('spotlight__item--active')
+
         }
         activeItem.removeClass('spotlight__item--active')
     }
+
 
     function formatSingleSearchResult(img = null, title = '', subtitle = '') {
         var image = ''
@@ -106,7 +177,7 @@
             '</figure>'
         }
         return '' +
-            '<li class="spotlight__item">' +
+            '<li class="spotlight__item" onmouseover="spotlight.selectItem(this)">' +
                 image +
                 '<div class="spotlight__info">' +
                     '<h3 class="spotlight__title">' + title + '</h3>' +
@@ -134,10 +205,18 @@
 
     function returnResults(results) {
         list.html(results)
-        // select first item
+
         if (results !== '') {
+            // remove empty results class
+            if (resultWrapper.hasClass('spotlight__results--empty')) {
+                resultWrapper.removeClass('spotlight__results--empty')
+            }
+            // select first item
             $('.spotlight__item', resultList).first().addClass('spotlight__item--active')
+        } else {
+            resultWrapper.addClass('spotlight__results--empty')
         }
+
     }
 
     /**
@@ -164,6 +243,7 @@
     // TODO: add namespace e.g. window.spotlight.ret...
 
     var spotlight = {
+        selectItem: selectItem,
         formatSingleSearchResult: formatSingleSearchResult,
         clearTitle: clearTitle,
         returnResults: returnResults,
