@@ -67,7 +67,8 @@ table {
   transition: top .3s ease-in-out;
   border-radius: 3px;
   overflow: hidden;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"; }
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  box-shadow: 0 1px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); }
   .spotlight__search {
     position: relative;
     padding: 12px 16px;
@@ -91,18 +92,21 @@ table {
     position: relative;
     width: 100%;
     margin: 0; }
-  .spotlight__list {
-    overflow: hidden;
-    padding-right: 8px;
-    padding-left: 8px;
+  .spotlight__results {
+    padding: 8px;
+    padding-top: 0;
     background-color: #0B0B0B; }
+    .spotlight__results--empty {
+      padding: 0; }
+  .spotlight__list {
+    position: relative;
+    max-height: 390px;
+    overflow: hidden; }
   .spotlight__item {
     padding: 4px 8px;
     color: #FFFFFF; }
-    .spotlight__item:hover, .spotlight__item--active {
+    .spotlight__item--active {
       background-color: #272727; }
-    .spotlight__item:last-child {
-      margin-bottom: 8px; }
   .spotlight__figure {
     float: left;
     width: 32px;
