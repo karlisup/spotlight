@@ -25,7 +25,9 @@ $spotlight-width: 540px;
 	outline: none;
 }
 
-.spotlight {
+// prefix with body to be more specific
+// than CSS reset which is under .spotlight <element>
+body .spotlight {
 	position: fixed;
 	top: 15%;
 	left: 50%;
@@ -71,6 +73,7 @@ $spotlight-width: 540px;
 
 	// gives
 	&__results {
+		position: relative;
 		padding: 8px;
 		padding-top: 0;
 		background-color: $color-alpha;
@@ -123,5 +126,23 @@ $spotlight-width: 540px;
 			top: 16px;
 			left: 16px;
 			right: 16px;
+		}
+
+	&__indicator {
+		position: absolute;
+		top: -2px;
+		bottom: 6px;
+		right: 8px;
+		width: 5px;
+		background-color: $color-alpha;
+	}
+		&__thumb {
+			position: absolute;
+			top: 0%;
+			right: 0;
+			width: 2px;
+			height: 10%;
+			background-color: $color-gray15;
+			transition: top ease-in-out .05s;
 		}
 }
