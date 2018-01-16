@@ -1,7 +1,7 @@
 // TODO:
 // 6) not working on iphone4 (calling sequence)
-// 7) Create a scrollbar to indicate "scrolling position"
-
+// 1) Make scrolling experience the same for all browsers/devices
+// 2) Show scrolling bar only when there is something to scroll
 
 
 (function(window){
@@ -11,6 +11,7 @@
     var inputWrapper = $('.spotlight__search')
     var resultWrapper = $('.spotlight__results')
     var resultList = $('.spotlight__list')
+    var thumb = $('.spotlight__thumb')
     var listScrolltop = 0
     // just imagine having Minecart driving up and down
     var itemHeight = 39 //px
@@ -87,6 +88,15 @@
         }
     });
 
+    // var dblCtrlKey = 0;
+    // Event.observe(document, 'keydown', function (event) {
+    //     if (dblCtrlKey != 0 && event.keyCode == 17) {
+    //         alert("Ok double ctrl");
+    //     } else {
+    //         dblCtrlKey = setTimeout('dblCtrlKey = 0;', 300);
+    //     }
+    // });
+
     $(resultList).on('mousewheel', function (event) {
         if (event.originalEvent.wheelDelta >= 0) {
             if (minecartAtTheTop()) return
@@ -144,6 +154,7 @@
             listScrolltop += itemHeight
         }
         resultList.scrollTop(listScrolltop)
+        refreshIntication()
     }
 
     function setNextActiveItem(direction) {
@@ -165,6 +176,20 @@
 
         }
         activeItem.removeClass('spotlight__item--active')
+    }
+
+    function refreshIntication() {
+        var trackLength = $('.spotlight__item').length * itemHeight
+        thumb.height(getIndicatorHeight(trackLength) + '%')
+        thumb.css('top', getIndicatorDistanceFromTop(trackLength) + '%')
+    }
+
+    function getIndicatorDistanceFromTop (trackLength) {
+        return listScrolltop * 100 / trackLength
+    }
+
+    function getIndicatorHeight(trackLength) {
+        return minecartHeight * 100 / trackLength
     }
 
 
