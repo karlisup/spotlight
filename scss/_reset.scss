@@ -47,7 +47,8 @@
 
 .spotlight {
 	@extend %rootElemReset;
-	nav, figure {
+	@extend %html5ElemReset;
+	figure {
 		@extend %html5ElemReset;
 	}
 	ul {

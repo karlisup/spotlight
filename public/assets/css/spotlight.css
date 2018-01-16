@@ -9,7 +9,7 @@
 .spotlight ul {
   list-style: none; }
 
-.spotlight nav, .spotlight figure {
+.spotlight, .spotlight figure {
   display: block; }
 
 .spotlight {
