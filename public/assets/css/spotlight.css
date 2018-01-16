@@ -1,20 +1,4 @@
-/* http://meyerweb.com/eric/tools/css/reset/ 
-   v2.0 | 20110126
-   License: none (public domain)
-*/
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed,
-figure, figcaption, footer, header, hgroup,
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
+.spotlight div, .spotlight h3, .spotlight p, .spotlight li, .spotlight ul, .spotlight nav, .spotlight figure, .spotlight img {
   margin: 0;
   padding: 0;
   border: 0;
@@ -22,30 +6,16 @@ time, mark, audio, video {
   font: inherit;
   vertical-align: baseline; }
 
-/* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, figure,
-footer, header, hgroup, menu, nav, section {
-  display: block; }
-
-body {
-  line-height: 1; }
-
-ol, ul {
+.spotlight ul {
   list-style: none; }
 
-blockquote, q {
-  quotes: none; }
+.spotlight nav, .spotlight figure {
+  display: block; }
 
-blockquote:before, blockquote:after,
-q:before, q:after {
-  content: '';
-  content: none; }
+.spotlight {
+  line-height: 1; }
 
-table {
-  border-collapse: collapse;
-  border-spacing: 0; }
-
-.spotlight__input, .spotlight__inputbg, .spotlight__inputbg:after {
+body .spotlight__input, body .spotlight__inputbg, body .spotlight__inputbg:after {
   box-sizing: border-box;
   background-color: transparent;
   border: none;
@@ -57,7 +27,7 @@ table {
   line-height: 40px;
   outline: none; }
 
-.spotlight {
+body .spotlight {
   position: fixed;
   top: 15%;
   left: 50%;
@@ -69,11 +39,11 @@ table {
   overflow: hidden;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   box-shadow: 0 1px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); }
-  .spotlight__search {
+  body .spotlight__search {
     position: relative;
     padding: 12px 16px;
     background-color: #0B0B0B; }
-  .spotlight__inputbg {
+  body .spotlight__inputbg {
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
@@ -82,43 +52,44 @@ table {
     display: inline-block;
     color: transparent;
     max-width: 100%; }
-    .spotlight__inputbg:after {
+    body .spotlight__inputbg:after {
       content: attr(data-autocomplete);
       color: #9F9FA0; }
-      .spotlight__search--smalldescr .spotlight__inputbg:after {
+      .spotlight__search--smalldescr body .spotlight__inputbg:after {
         font-size: 16px;
         vertical-align: middle; }
-  .spotlight__input {
+  body .spotlight__input {
     position: relative;
     width: 100%;
     margin: 0; }
-  .spotlight__results {
+  body .spotlight__results {
+    position: relative;
     padding: 8px;
     padding-top: 0;
     background-color: #0B0B0B; }
-    .spotlight__results--empty {
+    body .spotlight__results--empty {
       padding: 0; }
-  .spotlight__list {
+  body .spotlight__list {
     position: relative;
     max-height: 390px;
     overflow: hidden; }
-  .spotlight__item {
+  body .spotlight__item {
     padding: 4px 8px;
     color: #FFFFFF; }
-    .spotlight__item--active {
+    body .spotlight__item--active {
       background-color: #272727; }
-  .spotlight__figure {
+  body .spotlight__figure {
     float: left;
     width: 32px;
     height: 32px;
     margin-right: 8px; }
-  .spotlight__title {
+  body .spotlight__title {
     font-weight: 300;
     font-size: 15px;
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap; }
-  .spotlight__subtitle {
+  body .spotlight__subtitle {
     margin-top: 4px;
     font-weight: 100;
     font-size: 12px;
@@ -127,9 +98,24 @@ table {
     overflow: hidden;
     white-space: nowrap; }
   @media (max-width: 572px) {
-    .spotlight {
+    body .spotlight {
       transform: none;
       width: auto;
       top: 16px;
       left: 16px;
       right: 16px; } }
+  body .spotlight__indicator {
+    position: absolute;
+    top: -2px;
+    bottom: 6px;
+    right: 8px;
+    width: 5px;
+    background-color: #0B0B0B; }
+  body .spotlight__thumb {
+    position: absolute;
+    top: 0%;
+    right: 0;
+    width: 2px;
+    height: 10%;
+    background-color: #272727;
+    transition: top ease-in-out .05s; }
