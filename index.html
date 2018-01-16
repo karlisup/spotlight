@@ -1,0 +1,169 @@
+<!doctype html>
+<html>
+  <head>
+      <meta charset="utf-8">
+      <meta name="description" content="">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <title>Spotlight - a search widget for your web API</title>
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+      <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,600,700,800,900" rel="stylesheet">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/railscasts.min.css">
+      <link rel="stylesheet" href="scribbler-global.css">
+      <link rel="stylesheet" href="scribbler-landing.css">
+      <link rel="stylesheet" href="https://cdn.rawgit.com/karlisup/spotlight/master/public/assets/css/spotlight.css?v=1">
+      <link rel="stylesheet" href="custom.css">
+
+      <!-- <link rel="author" href="humans.txt"> -->
+  </head>
+  <body>
+    <nav>
+      <div class="logo"></div>
+      <ul class="menu">
+        <div class="menu__item toggle"><span></span></div>
+        <!-- <li class="menu__item"><a href="doc.html" class="link link--dark"><i class="fa fa-book"></i> Documentation</a></li> -->
+        <li class="menu__item"><a href="https://github.com/karlisup/spotlight" class="link link--dark"><i class="fa fa-github"></i> Github</a></li>
+      </ul>
+    </nav>
+    <div class="hero">
+      <h1 class="hero__title">Spotlight</h1>
+      <p class="hero__description">Search widget for your web API</p>
+    </div>
+    <div class="hero__terminal">
+      <p>
+        Hit <span class="hero__label">Ctrl</span> + <span class="hero__label">Ctrl</span>
+      </p>
+    </div>
+    <div class="wrapper">
+      <div class="installation">
+        <h3 class="section__title">Installation</h3>
+        <div class="tab__container">
+          <ul>
+            <li class="tab active" data-tab="ssh">ssh</li>
+            <li class="tab" data-tab="https">https</li>
+            <li class="tab" data-tab="zip">zip</li>
+          </ul>
+          <pre class="nohighlight code">
+            <code class="tab__pane active ssh">$  git clone git@github.com:karlisup/spotlight.git</code>
+            <code class="tab__pane https">$  git clone https://github.com/karlisup/spotlight.git</code>
+            <code class="tab__pane zip"><a href="https://github.com/karlisup/spotlight/archive/master.zip">https://github.com/karlisup/spotlight/archive/master.zip</a></code>
+          </pre>
+        </div>
+      </div>
+      <div class="feature">
+        <div class="feature__item">
+          <h3 class="section__title">Simple &amp; Fast</h3>
+          <p>Have your search results without moving your hands from keyboard where you want them.</p>
+        </div>
+        <div class="feature__item">
+          <h3 class="section__title">Your API</h3>
+          <p>Connect your API and handle it as you want - in front end or back end. Front end <a href="#">example</a>.</p>
+        </div>
+        <div class="feature__item">
+          <h3 class="section__title">Keybindings</h3>
+          <p>Do whatever you imagine with your results. Copy, open link in a new page, execute <span class="code code--inline">JavaScript</span> script.</p>
+        </div>
+        <div class="feature__item">
+          <h3 class="section__title">Autocomplete</h3>
+          <p>Find faster thing you have been looking for. One letter may be enough.</p>
+        </div>
+        <div class="feature__item">
+          <h3 class="section__title">Theamable</h3>
+          <p>Change the look of the search input or the results to your liking.</p>
+        </div>
+        <div class="feature__item">
+          <h3 class="section__title">Open Source</h3>
+          <p>Use it in any project you desire. Let your imagination be the only limit.</p>
+        </div>
+      </div>
+      <div class="keybinding">
+        <ul class="keybinding__detail">
+          <h3 class="keybinding__title">Default Keybindings</h3>
+          <li>Show search bar <span class="keybinding__label">Ctrl</span><span class="keybinding__label">Ctrl</span></li>
+          <li>Autocomplete <span class="keybinding__label">Tab</span></li>
+          <li>Navigate up <span class="keybinding__label">Up</span></li>
+          <li>Navigate down <span class="keybinding__label">Down</span></li>
+        </ul>
+        <ul class="keybinding__detail">
+          <h3 class="keybinding__title">Action Keybindings</h3>
+          <li><span class="keybinding__label">Cmd/Ctrl + C</span> Copy string</li>
+        </ul>
+      </div>
+      <div class="callout">
+        <p>Take a look on the code</p>
+        <a href="https://github.com/karlisup/spotlight" class="button--primary">GitHub</a>
+      </div>
+    </div>
+   <!--  <div class="changelog">
+      <div class="wrapper">
+        <h3 class="section__title">Changelog</h3>
+        <div class="changelog__item">
+          <div class="changelog__meta">
+            <h4 class="changelog__title">v0.7</h4>
+            <small class="changelog__date">10/12/2017</small>
+          </div>
+          <div class="changelog__detail">
+            <ul>
+              <li>Improving the writing workflow with better key bindings</li>
+              <li>Design updates</li>
+              <li>SSL Verification for web hooks</li>
+              <li>Render Emoji</li>
+            </ul>
+          </div>
+        </div>
+        <div class="changelog__item">
+          <div class="changelog__meta">
+            <h4 class="changelog__title">v0.6</h4>
+            <small class="changelog__date">7/30/2017</small>
+          </div>
+          <div class="changelog__detail">
+            <ul>
+              <li>Adding Unicode support</li>
+              <li>Basic text highlighting</li>
+              <li>Fresh Design</li>
+            </ul>
+          </div>
+        </div>
+        <div class="changelog__item">
+          <div class="changelog__meta">
+            <h4 class="changelog__title">v0.5</h4>
+            <small class="changelog__date">5/10/2017</small>
+          </div>
+          <div class="changelog__detail">
+            <ul>
+              <li>Save default md file in new folders</li>
+              <li>Ability to quick search on existing notes</li>
+            </ul>
+          </div>
+        </div>
+        <div class="changelog__callout">
+          <a href="#" class="button--secondary">Checkout Full Log</a>
+        </div>
+      </div> -->
+    </div>
+    <footer class="footer">If you like what you see, consider hitting that &nbsp;
+      <a class="github-button" href="https://github.com/karlisup/spotlight" data-icon="octicon-star" data-show-count="true" aria-label="Star karlisup/spotlight on GitHub">Star</a>
+        button.
+    </footer>
+
+    <nav class="spotlight">
+      <div class="spotlight__search">
+        <div class="spotlight__inputbg" data-autocomplete=""></div>
+        <input class="spotlight__input" type="text" autofocus>
+      </div>
+      <div class="spotlight__results spotlight__results--empty">
+        <ul class="spotlight__list"></ul>
+        <div class="spotlight__indicator">
+          <div class="spotlight__thumb"></div>
+        </div>
+      </div>
+    </nav>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <script src="https://cdn.rawgit.com/karlisup/spotlight/master/public/assets/js/jquery-3.2.1.min.js"></script>
+    <script src="https://cdn.rawgit.com/karlisup/spotlight/master/public/assets/js/spotlight.js"></script>
+    <script src="https://cdn.rawgit.com/karlisup/spotlight/master/public/assets/js/spotlight-modules.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script src="scribbler.js"></script>
+  </body>
+</html>
