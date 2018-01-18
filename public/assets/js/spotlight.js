@@ -5,6 +5,7 @@
 
 
 (function(window){
+    var widget = $('.spotlight')
     var input = $('.spotlight__input')
     var inputbg = $('.spotlight__inputbg')
     var list = $('.spotlight__list')
@@ -65,6 +66,46 @@
         }
     }
 
+    function resetCtrl() {
+        dblCtrlKey = 0
+    }
+
+    function closeIfClickedOutside(e) {
+        if (!widget.is(e.target) && widget.has(e.target).length === 0) {
+            hideSpotlight()
+        }
+    }
+
+    function showSpotlight() {
+        widget.addClass('spotlight--active')
+        $(document).on('mouseup.hideSpotlight', closeIfClickedOutside)
+    }
+
+    function hideSpotlight() {
+        widget.removeClass('spotlight--active')
+        $(document).off('.hideSpotlight') // document stops listening for clicks
+    }
+
+    var dblCtrlKey = 0;
+    $(document).on('keydown', function (e) {
+        var keyCode = e.keyCode || e.which;
+        // show spotlight on Ctrl + Ctrl
+        if (dblCtrlKey != 0 && keyCode == 17) {
+            showSpotlight()
+            resetCtrl()
+        } else {
+            dblCtrlKey++
+            setTimeout(resetCtrl, 400);
+        }
+
+        // hide spotlight on ESC
+        if (keyCode == 27) {
+            hideSpotlight()
+        }
+    })
+
+
+
     input.on('keydown', function (e) {
         var keyCode = e.keyCode || e.which;
 
@@ -87,15 +128,6 @@
             setNextActiveItem('down')
         }
     });
-
-    // var dblCtrlKey = 0;
-    // Event.observe(document, 'keydown', function (event) {
-    //     if (dblCtrlKey != 0 && event.keyCode == 17) {
-    //         alert("Ok double ctrl");
-    //     } else {
-    //         dblCtrlKey = setTimeout('dblCtrlKey = 0;', 300);
-    //     }
-    // });
 
     $(resultList).on('mousewheel', function (event) {
         if (event.originalEvent.wheelDelta >= 0) {
@@ -127,8 +159,6 @@
     // |#######|
     // =========
     // ||     ||  goes down
-    // ||     ||
-    // ||     ||
     // ||     ||
     // ||     ||
 
@@ -191,7 +221,6 @@
     function getIndicatorHeight(trackLength) {
         return minecartHeight * 100 / trackLength
     }
-
 
     function formatSingleSearchResult(img = null, title = '', subtitle = '') {
         var image = ''
@@ -263,9 +292,6 @@
     function clearTitle() {
         inputbg.attr('data-autocomplete', '')
     }
-
-    // make some functions publicly available
-    // TODO: add namespace e.g. window.spotlight.ret...
 
     var spotlight = {
         selectItem: selectItem,
