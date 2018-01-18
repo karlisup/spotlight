@@ -28,6 +28,7 @@ $spotlight-width: 540px;
 // prefix with body to be more specific
 // than CSS reset which is under .spotlight <element>
 body .spotlight {
+	display: none; // by default closed
 	position: fixed;
 	top: 15%;
 	left: 50%;
@@ -40,6 +41,10 @@ body .spotlight {
 	overflow: hidden;
 	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 	box-shadow: 0 1px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+	&--active {
+		display: block;
+	}
 
 	&__search {
 		position: relative;
