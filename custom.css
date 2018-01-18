@@ -8,8 +8,8 @@
 	align-items: center;
 	justify-content: center;
 
-	background: transparent;
-	border: 20px dashed var(--light-gray-color);
+	background: rgba(255,255,255,.6);
+	border: 1px solid var(--light-gray-color);
 	box-shadow: none;
 	font-size: 42px;
 }
