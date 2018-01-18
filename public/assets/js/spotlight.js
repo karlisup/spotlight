@@ -79,6 +79,7 @@
     function showSpotlight() {
         widget.addClass('spotlight--active')
         $(document).on('mouseup.hideSpotlight', closeIfClickedOutside)
+        input.focus()
     }
 
     function hideSpotlight() {
