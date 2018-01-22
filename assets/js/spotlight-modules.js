@@ -30,7 +30,7 @@
     // general functions
     function getForecast(location) {
         var locationQuery = escape("select item from weather.forecast where woeid in (select woeid from geo.places(1) where text='" + location + "') and u='c'"),
-            locationUrl = "http://query.yahooapis.com/v1/public/yql?q=" + locationQuery + "&format=json";
+            locationUrl = "https://query.yahooapis.com/v1/public/yql?q=" + locationQuery + "&format=json";
         $.ajax({
             url: locationUrl,
             method: 'GET'
