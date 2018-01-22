@@ -1,8 +1,10 @@
 // TODO:
 // 6) not working on iphone4 (calling sequence)
 // 1) Make scrolling experience the same for all browsers/devices
-// 2) Show scrolling bar only when there is something to scroll
-
+// 3) DEMO: Fix image issue (404/500)?
+// 5) TESTING: Create an example with filled input/input_bg element and list with 13 entries
+// 6) TESTING: Do browsershots on the test example
+// 7) DEMO: Fix tabs overlapping content
 
 (function(window){
     var widget = $('.spotlight')
@@ -12,6 +14,7 @@
     var inputWrapper = $('.spotlight__search')
     var resultWrapper = $('.spotlight__results')
     var resultList = $('.spotlight__list')
+    var indicator = $('.spotlight__indicator')
     var thumb = $('.spotlight__thumb')
     var listScrolltop = 0
     // just imagine having Minecart driving up and down
@@ -131,6 +134,7 @@
     });
 
     $(resultList).on('mousewheel', function (event) {
+        event.preventDefault() // don't page scroll if resultlist hovered
         if (event.originalEvent.wheelDelta >= 0) {
             if (minecartAtTheTop()) return
             singleScroll('up')
@@ -268,6 +272,14 @@
             }
             // select first item
             $('.spotlight__item', resultList).first().addClass('spotlight__item--active')
+
+            // if list longer than 10 items, add scroll indicator
+            if ($('.spotlight__item').length > 10) {
+                indicator.addClass('spotlight__indicator--active')
+                refreshIntication()
+            } else {
+                indicator.removeClass('spotlight__indicator--active')
+            }
         } else {
             resultWrapper.addClass('spotlight__results--empty')
         }
@@ -299,7 +311,8 @@
         formatSingleSearchResult: formatSingleSearchResult,
         clearTitle: clearTitle,
         returnResults: returnResults,
-        setAutocomplete: setAutocomplete
+        setAutocomplete: setAutocomplete,
+        showSpotlight: showSpotlight
     }
     window.spotlight = spotlight
 
