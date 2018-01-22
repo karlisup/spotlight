@@ -104,7 +104,7 @@
             if (image.src === null) {
                 image = null
             } else {
-                image.src = '/assets/images/weather/' + image.src
+                image.src = 'assets/images/weather/' + image.src
             }
 
             populatedResults += spotlight.formatSingleSearchResult(
