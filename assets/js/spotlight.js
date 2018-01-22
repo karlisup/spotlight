@@ -136,6 +136,7 @@
     });
 
     $(resultList).on('mousewheel', function (event) {
+        event.preventDefault() // don't page scroll if resultlist hovered
         if (event.originalEvent.wheelDelta >= 0) {
             if (minecartAtTheTop()) return
             singleScroll('up')
