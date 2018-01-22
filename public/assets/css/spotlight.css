@@ -30,7 +30,7 @@ body .spotlight__input, body .spotlight__inputbg, body .spotlight__inputbg:after
 body .spotlight {
   display: none;
   position: fixed;
-  top: 15%;
+  top: 80px;
   left: 50%;
   width: 100%;
   max-width: 540px;
@@ -100,20 +100,16 @@ body .spotlight {
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap; }
-  @media (max-width: 572px) {
-    body .spotlight {
-      transform: none;
-      width: auto;
-      top: 16px;
-      left: 16px;
-      right: 16px; } }
   body .spotlight__indicator {
+    display: none;
     position: absolute;
     top: -2px;
     bottom: 6px;
     right: 8px;
     width: 5px;
     background-color: #0B0B0B; }
+    body .spotlight__indicator--active {
+      display: block; }
   body .spotlight__thumb {
     position: absolute;
     top: 0%;
@@ -122,3 +118,13 @@ body .spotlight {
     height: 10%;
     background-color: #272727;
     transition: top ease-in-out .05s; }
+  @media (max-width: 572px) {
+    body .spotlight {
+      transform: none;
+      width: auto;
+      top: 16px;
+      left: 16px;
+      right: 16px; } }
+  @media (max-height: 574px) {
+    body .spotlight {
+      top: 16px; } }

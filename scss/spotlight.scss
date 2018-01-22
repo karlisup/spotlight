@@ -1,5 +1,7 @@
 $border-radius: 3px;
+$spotlight-top: 80px;
 $spotlight-width: 540px;
+$spotlight-height: 462px; // default height with 10 items
 
 @import 'reset';
 @import 'colors';
@@ -30,7 +32,7 @@ $spotlight-width: 540px;
 body .spotlight {
 	display: none; // by default closed
 	position: fixed;
-	top: 15%;
+	top: $spotlight-top; // would prefer 15%
 	left: 50%;
 	width: 100%;
 	max-width: $spotlight-width;
@@ -123,23 +125,17 @@ body .spotlight {
 			@include ellipsis();
 		}
 
-
-		// layout for mobile devices
-		@media (max-width: $spotlight-width + 2*16px) {
-			transform: none;
-			width: auto;
-			top: 16px;
-			left: 16px;
-			right: 16px;
-		}
-
 	&__indicator {
+		display: none;
 		position: absolute;
 		top: -2px;
 		bottom: 6px;
 		right: 8px;
 		width: 5px;
 		background-color: $color-alpha;
+		&--active {
+			display: block;
+		}
 	}
 		&__thumb {
 			position: absolute;
@@ -150,4 +146,17 @@ body .spotlight {
 			background-color: $color-gray15;
 			transition: top ease-in-out .05s;
 		}
+
+	// layout for mobile devices
+	@media (max-width: $spotlight-width + 2*16px) {
+		transform: none;
+		width: auto;
+		top: 16px;
+		left: 16px;
+		right: 16px;
+	}
+
+	@media (max-height: $spotlight-height + 2*16px + $spotlight-top) {
+		top: 16px;
+	}
 }
