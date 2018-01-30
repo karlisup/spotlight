@@ -1,12 +1,15 @@
 // TODO:
 // 6) not working on iphone4 (calling sequence)
 // 1) Make scrolling experience the same for all browsers/devices
+// 8) Scrolling on iphone not working at all
+// 9) Reduce spotlight height for mobile devies (omg)
 // 2) DEMO: Add button with spotlight.showSpotlight() to support phone/tablet users
 // 3) DEMO: Fix image issue (404/500)?
 // 4) DEMO: Move javascript / css files to demo page and update them constantly
 // 5) TESTING: Create an example with filled input/input_bg element and list with 13 entries
-// 6) TESTING: Do browsershots on the test example
+// 9) TESTING: Do browsershots on the test example
 // 7) DEMO: Fix tabs overlapping content
+
 
 (function(window){
     var widget = $('.spotlight')
