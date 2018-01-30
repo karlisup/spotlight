@@ -52,6 +52,11 @@ window.addEventListener("load", function() {
     var panes = getAll('.tab__pane', scope);
     var activePane = get(`.${clickedTab.getAttribute('data-tab')}`, scope);
 
+    // if clicked element is not tab - exit
+    if (!((clickedTab.className + ' ').indexOf('tab ') > -1)) {
+      return
+    }
+
     // remove all active tab classes
     for (var i = 0; i < tabs.length; i++) {
       tabs[i].classList.remove('active');
@@ -143,4 +148,3 @@ window.addEventListener('load', function(){
   }
   icon.addEventListener('click', showNav);
 });
-
