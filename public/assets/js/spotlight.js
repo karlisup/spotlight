@@ -133,7 +133,24 @@
         }
     });
 
-    $(resultList).on('mousewheel', function (event) {
+
+    function debounce(func, time) {
+        var callback = func,
+            waiting = false,
+            context = this;
+        var rtn = function () {
+            if (waiting) return;
+            waiting = true;
+            var args = arguments;
+            setTimeout(function () {
+                waiting = false;
+                callback.apply(context, args);
+            }, time);
+        };
+        return rtn;
+    }
+
+    function onWheel(event) {
         event.preventDefault() // don't page scroll if resultlist hovered
         if (event.originalEvent.wheelDelta >= 0) {
             if (minecartAtTheTop()) return
@@ -143,7 +160,30 @@
             if (minecartAtTheBottom()) return
             singleScroll('down')
         }
+    }
+    function onTouch(event){
+        var touchEnd = event.originalEvent.changedTouches[0].clientY;
+        if(touchStart > touchEnd){
+            if (minecartAtTheBottom()) return
+            singleScroll('down')
+        }else if(touchStart < touchEnd){
+            if (minecartAtTheTop()) return
+            singleScroll('up')
+        }
+        touchStart = touchEnd
+    };
+
+    var debouncedOnWheel = debounce(onWheel, 40);
+    var debouncedOnTouch = debounce(onTouch, 60); // make it twice as slow. Easier to select item when scrolling on phone.
+    var touchStart; // to be able to see the direction (get delta for touchemove)
+    $(resultList).bind('touchstart', function (e){
+       touchStart = e.originalEvent.touches[0].clientY;
     });
+    $(resultList).on('mousewheel', debouncedOnWheel)
+    $(resultList).on('touchmove', function(event) {
+        event.preventDefault()
+        debouncedOnTouch(event)
+    })
 
     /**
      * Called from outside on item hover
