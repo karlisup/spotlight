@@ -24,4 +24,4 @@ gulp.task('watch', function(){
     gulp.watch('scss/**/*.scss', gulp.series('css'));
 });
 
-gulp.task('default', gulp.series('watch', 'browserSync'));
+gulp.task('default', gulp.parallel('watch', 'browserSync'));
